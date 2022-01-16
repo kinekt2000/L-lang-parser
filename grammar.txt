@@ -1,0 +1,82 @@
+program : def_list
+
+def_list : definition def_list
+         | /* empty */
+         ;
+
+definition : fdef
+
+dfef : f_head statement
+
+f_head : "function" IDENT "(" arg_list ")"
+       | "function" IDENT "(" ")"
+       ;
+
+arg_list : decl
+         | decl "," arg_list
+         ;
+
+decl : IDENT
+
+statement : operation ";"
+          | "if" "(" condition ")" statement "else" statement
+          | "if" "(" condition ")" statement
+          | "while" "(" condition ")" statement
+          | block
+          ;
+
+block : "{" stm_list "}"
+
+stm_list : statement stm_list
+         | /* empty */
+         ;
+
+operation : "let" IDENT
+          | IDENT "=" expression
+          | "let" IDENT "=" expression
+          | "read" "(" IDENT ")"
+          | "write" "(" expressions ")"
+          | "write" "(" condition ")"
+          | "return" expression
+          | expression
+          | condition
+          ;
+
+expression : <assoc="right"> expression "^" expression
+           | "-" expression
+           | expression "*" expression
+           | expression "/" expression
+           | expression "+" expression
+           | expression "-" expression
+           | "(" expression ")"
+           | IDENT "(" exp_list ")"
+           | IDENT "(" ")"
+           | IDENT
+           | number
+           ;
+
+exp_list : expression
+         | expression "," exp_list
+         ;
+
+condition : "!" condition
+          | <assoc="right"> condition "&&" condition
+          | <assoc="right"> condition "||" condition
+          | "(" condition ")"
+          | expression "==" expression
+          | expression "!=" expression
+          | expression "<=" expression
+          | expression "<" expression
+          | expression ">=" expression
+          | expression ">" expression
+          ;
+
+number : INT
+       | FLOAT
+       ;
+
+IDENT : r"[a-zA-Z_][a-zA-Z0-9_]*";
+
+INT: r"\d+";
+
+FLOAT: r"([0-9]*[.])?[0-9]+"
