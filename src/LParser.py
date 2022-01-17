@@ -1,5 +1,5 @@
 from __future__ import annotations
-import sys, getopt, os
+import sys, getopt, os, re
 from typing import Literal
 from collections.abc import Iterable
 import six
@@ -52,6 +52,12 @@ def find_column(text, token):
     column = (token.index - last_cr)
     return column
 
+def get_trailing_number(s:str):
+    m = re.search(r"^([a-zA-Z]*)(\d*)$", s)
+    name = m.group(1)
+    number = m.group(2)
+    return name, int(number) if number else 0
+
 ##########################
 #####    AST ATOM    #####
 ##########################
@@ -73,6 +79,18 @@ class Node:
         else:
             ret += f":{self.value}\n"
         return(ret)
+
+    def __getattr__(self, __name: str):
+        if iterable(self.value):
+            name, number = get_trailing_number(__name)
+            approp_childs = [node for node in self.value if isinstance(node, Node) and node.name == name]
+            approp_childs_l = len(approp_childs)
+            if approp_childs_l == 0:
+                raise AttributeError(f"Node[{self.name}] object has no attribute {name!r}")
+            if number >= approp_childs_l:
+                raise AttributeError(f"Node[{self.name}] object has a total of {approp_childs_l} attributes {name!r}")
+            return approp_childs[number]
+        raise AttributeError(f"Node[{self.name}] object has no childs. Use 'Node::value'")
 
 
 def dump_ast(ast: Node, format: Literal["txt", "json"]="txt", dump_image:str|None=""):
@@ -128,13 +146,23 @@ class LParser(Parser):
     )
 
     def __init__(self, text):
-        self.env = {}
+        self.warns = []
         self.text = text
 
+    @_("program")
+    def main_test(self, p):
+        main_node = next((node for node in p[0].value if node.FNAME.value == "main"), None)
+        if main_node is None:
+            self.warns.append("main function is not defined")
+        return p[0]
+
     #===== ROOT RULE =====#
-    @_("def_list")
+    @_("definition def_list")
     def program(self, p):
-        return Node("PROG", p.def_list)
+        if p.def_list:
+            return Node("PROG", (p.definition, *p.def_list))
+        else:
+            return Node("PROG", p.definition)
 
     #===== Sequence of definitions =====#
     @_("definition def_list")
@@ -564,23 +592,30 @@ if __name__ == "__main__":
 
         if options['outputfile']:
             try:
-                output_fp = open(options['outputfile'], "xw")
+                output_fp = open(f"{options['outputfile']}.{options['fileformat']}", "x", encoding="utf-8")
             except FileExistsError:
-                print("File alreasy exist")
-                while(accept:=input("Rewrite file? (y/n): ") != "y"):
-                    if accept == "n":
+                print(f"'{options['outputfile']}.{options['fileformat']}' alreasy exist")
+                while((answer:=input("Rewrite file? (y/n): ")) != "y"):
+                    if answer == "n":
                         print("Output printed into stdout")
                         print(output_string)
+                        output_fp = None
                         break
                     else:
-                        print(f"Unknown answer {accept!r}")
-                exit(0)
+                        print(f"Unknown answer {answer!r}")
+                else:
+                    output_fp = open(f"{options['outputfile']}.{options['fileformat']}", "w", encoding="utf-8")
             except IOError as error:
                 print(error)
                 exit(0)
 
-            with output_fp:
-                output_fp.write(output_string)
-                print(f"Abstract Syntax Tree printed into {os.getcwd()}{os.path.sep}{options['outputfile']}.{options['fileformat']}")
+            if output_fp:
+                with output_fp:
+                    output_fp.write(output_string)
+                    print(f"Abstract Syntax Tree printed into {os.getcwd()}{os.path.sep}{options['outputfile']}.{options['fileformat']}")
         else:
             print(output_string)
+
+        if parser.warns:
+            for warn in parser.warns:
+                print(f"WARNING::{warn}")

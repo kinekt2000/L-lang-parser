@@ -1,4 +1,5 @@
-program : def_list
+program : definition def_list /* program can't be empty */
+        ;
 
 def_list : definition def_list
          | /* empty */

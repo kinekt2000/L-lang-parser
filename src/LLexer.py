@@ -241,7 +241,7 @@ if __name__ == "__main__":
 
         if options['outputfile']:
             try:
-                output_fp = open(options['outputfile'], "xw")
+                output_fp = open(options['outputfile'], "x")
             except FileExistsError:
                 print("File alreasy exist")
                 while(accept:=input("Rewrite file? (y/n): ") != "y"):
@@ -251,7 +251,8 @@ if __name__ == "__main__":
                         break
                     else:
                         print(f"Unknown answer {accept!r}")
-                exit(0)
+                else:
+                    output_fp = open(options['outputfile'], "w")
             except IOError as error:
                 print(error)
                 exit(0)
