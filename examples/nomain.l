@@ -1,0 +1,1 @@
+function nomain() return 0;
