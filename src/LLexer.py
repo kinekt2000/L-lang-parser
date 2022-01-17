@@ -192,7 +192,7 @@ def make_options(opts, args):
 
 def print_help():
     print("NAME:")
-    print("\tLLexer - parser for non-exsitend L lang")
+    print("\tLLexer - lexer for non-exsitend L lang")
     
     print("SYNOPSIS:")
     print("\tLLexer [options]... input_file")
