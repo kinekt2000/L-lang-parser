@@ -120,9 +120,9 @@ function main() {
 ### Lexer
 ```
 NAME:
-        LParser - parser for non-exsitend L lang
+        LLexer - parser for non-exsitend L lang
 SYNOPSIS:
-        LParser [options]... input_file
+        LLexer [options]... input_file
 DESCRIPTION
         Write arguments to the standard output.
 
