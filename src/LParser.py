@@ -612,7 +612,7 @@ if __name__ == "__main__":
             if output_fp:
                 with output_fp:
                     output_fp.write(output_string)
-                    print(f"Abstract Syntax Tree printed into {os.getcwd()}{os.path.sep}{options['outputfile']}.{options['fileformat']}")
+                    print(f"Abstract Syntax Tree printed into {os.path.abspath(output_fp.name)}")
         else:
             print(output_string)
 

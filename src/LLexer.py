@@ -258,7 +258,7 @@ if __name__ == "__main__":
                 exit(0)
             with output_fp:
                 output_fp.write(output_string)
-                print(f"Token List printed into {os.getcwd()}{os.path.sep}{options['outputfile']}")
+                print(f"Token List printed into {os.path.abspath(output_fp.name)}")
         else:
             print(output_string)
         
