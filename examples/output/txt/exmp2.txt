@@ -1,0 +1,22 @@
+PROG
+├── FDEF
+│   ├── FNAME[main]
+│   ├── FARGS
+│   │   └── FARG[a]
+│   └── FBODY
+│       ├── IF
+│       │   ├── COND
+│       │   │   └── GRT
+│       │   │       ├── FLOAT[20.0]
+│       │   │       └── FLOAT[30.0]
+│       │   ├── BRANCH[None]
+│       │   └── BRANCH
+│       │       └── WRITE
+│       │           └── FLOAT[0.0]
+│       ├── FCALL
+│       │   └── FNAME[empty]
+│       └── RETURN
+│           └── FLOAT[0.0]
+└── FDEF
+    ├── FNAME[empty]
+    └── FBODY[None]

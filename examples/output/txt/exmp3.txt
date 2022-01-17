@@ -1,0 +1,62 @@
+PROG
+├── FDEF
+│   ├── FNAME[foo]
+│   ├── FARGS
+│   │   ├── FARG[a]
+│   │   ├── FARG[b]
+│   │   └── FARG[c]
+│   └── FBODY
+│       ├── WRITE
+│       │   └── VAR[a]
+│       ├── WRITE
+│       │   └── VAR[b]
+│       ├── WRITE
+│       │   └── VAR[c]
+│       └── RETURN
+│           └── ADD
+│               ├── ADD
+│               │   ├── VAR[a]
+│               │   └── VAR[b]
+│               └── VAR[c]
+├── FDEF
+│   ├── FNAME[bar]
+│   ├── FARGS
+│   │   ├── FARG[a]
+│   │   ├── FARG[b]
+│   │   └── FARG[c]
+│   └── FBODY
+│       └── RETURN
+│           └── DIV
+│               ├── MUL
+│               │   ├── VAR[a]
+│               │   └── VAR[b]
+│               └── VAR[c]
+└── FDEF
+    ├── FNAME[main]
+    └── FBODY
+        ├── VARDECL
+        │   └── NAME[a]
+        ├── VARASGN
+        │   ├── VAR[a]
+        │   └── FLOAT[10.7]
+        ├── VARDECL
+        │   └── NAME[b]
+        ├── VARASGN
+        │   ├── VAR[b]
+        │   └── FLOAT[0.92]
+        ├── VARDECL
+        │   └── NAME[c]
+        ├── READ
+        │   └── VAR[c]
+        └── WRITE
+            └── SUB
+                ├── FCALL
+                │   ├── FNAME[foo]
+                │   ├── VAR[a]
+                │   ├── VAR[b]
+                │   └── VAR[c]
+                └── FCALL
+                    ├── FNAME[bar]
+                    ├── VAR[a]
+                    ├── VAR[b]
+                    └── VAR[c]

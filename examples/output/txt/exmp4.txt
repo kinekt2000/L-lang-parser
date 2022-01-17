@@ -1,0 +1,22 @@
+PROG
+└── FDEF
+    ├── FNAME[main]
+    ├── FARGS
+    │   ├── FARG[arg1]
+    │   ├── FARG[arg2]
+    │   └── FARG[arg3]
+    └── FBODY
+        ├── VARDECL
+        │   └── NAME[v]
+        ├── READ
+        │   └── VAR[v]
+        └── WRITE
+            └── ADD
+                ├── MUL
+                │   ├── VAR[v]
+                │   └── FLOAT[0.543]
+                └── POW
+                    ├── FLOAT[5.228]
+                    └── DIV
+                        ├── FLOAT[54.0]
+                        └── FLOAT[23.5543]

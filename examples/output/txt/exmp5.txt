@@ -1,0 +1,40 @@
+PROG
+├── FDEF
+│   ├── FNAME[fib]
+│   ├── FARGS
+│   │   └── FARG[n]
+│   └── FBODY
+│       ├── IF
+│       │   ├── COND
+│       │   │   └── LEQ
+│       │   │       ├── VAR[n]
+│       │   │       └── FLOAT[1.0]
+│       │   └── BRANCH
+│       │       └── RETURN
+│       │           └── VAR[n]
+│       └── RETURN
+│           └── ADD
+│               ├── FCALL
+│               │   ├── FNAME[fib]
+│               │   └── SUB
+│               │       ├── VAR[n]
+│               │       └── FLOAT[1.0]
+│               └── FCALL
+│                   ├── FNAME[fib]
+│                   └── SUB
+│                       ├── VAR[n]
+│                       └── FLOAT[2.0]
+└── FDEF
+    ├── FNAME[main]
+    └── FBODY
+        ├── VARDECL
+        │   └── NAME[n]
+        ├── READ
+        │   └── VAR[n]
+        ├── FCALL
+        │   ├── FNAME[print]
+        │   └── FCALL
+        │       ├── FNAME[fib]
+        │       └── VAR[n]
+        └── RETURN
+            └── FLOAT[0.0]
