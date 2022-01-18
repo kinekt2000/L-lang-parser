@@ -85,12 +85,12 @@ function main() {
     }
 }
 ```
-The variable declaration operator already shown earlier. A variable can be simply declared, or it can also be assigned. Integer and floating point variables available.
+The variable declaration operator already shown earlier. A variable can be simply declared, or it can also be assigned. Integer and floating point variables available. Integers can be written in binary with prefix "_0b_" or "_0B_".
 ```js
 function main() {
     let a;
-    a = 10;
-    let b = 10.5 - 6;
+    a = 0b1010;
+    let b = 10.5 - 6 / 0B10;
 }
 ```
 Functions and variable assignments take an expression
