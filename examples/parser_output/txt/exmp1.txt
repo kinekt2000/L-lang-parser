@@ -10,12 +10,12 @@ PROG
         │   └── NAME[a]
         ├── VARASGN
         │   ├── VAR[a]
-        │   └── FLOAT[10.0]
+        │   └── INT[10]
         ├── VARDECL
         │   └── NAME[b]
         ├── VARASGN
         │   ├── VAR[b]
-        │   └── FLOAT[30.0]
+        │   └── INT[30]
         ├── VARDECL
         │   └── NAME[c]
         ├── VARASGN
@@ -24,19 +24,19 @@ PROG
         │       ├── SUB
         │       │   ├── VAR[b]
         │       │   └── VAR[a]
-        │       └── FLOAT[2.0]
+        │       └── INT[2]
         ├── WRITE
         │   └── OR
         │       ├── NOT
         │       │   └── GRT
         │       │       ├── SUB
         │       │       │   ├── VAR[b]
-        │       │       │   └── FLOAT[6.0]
-        │       │       └── FLOAT[25.0]
+        │       │       │   └── INT[6]
+        │       │       └── INT[25]
         │       └── EQU
         │           ├── POW
-        │           │   ├── FLOAT[2.0]
-        │           │   └── FLOAT[8.0]
+        │           │   ├── INT[2]
+        │           │   └── INT[8]
         │           └── VAR[c]
         ├── VARDECL
         │   └── NAME[d]

@@ -18,5 +18,5 @@ PROG
                 └── POW
                     ├── FLOAT[5.228]
                     └── DIV
-                        ├── FLOAT[54.0]
+                        ├── INT[54]
                         └── FLOAT[23.5543]

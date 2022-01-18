@@ -8,24 +8,26 @@ PROG
 │       │   ├── COND
 │       │   │   └── LEQ
 │       │   │       ├── VAR[n]
-│       │   │       └── FLOAT[1.0]
-│       │   └── BRANCH
-│       │       └── RETURN
-│       │           └── VAR[n]
+│       │   │       └── INT[1]
+│       │   ├── BRANCH
+│       │   │   └── RETURN
+│       │   │       └── VAR[n]
+│       │   └── BRANCH[None]
 │       └── RETURN
 │           └── ADD
 │               ├── FCALL
 │               │   ├── FNAME[fib]
 │               │   └── SUB
 │               │       ├── VAR[n]
-│               │       └── FLOAT[1.0]
+│               │       └── INT[1]
 │               └── FCALL
 │                   ├── FNAME[fib]
 │                   └── SUB
 │                       ├── VAR[n]
-│                       └── FLOAT[2.0]
+│                       └── INT[2]
 └── FDEF
     ├── FNAME[main]
+    ├── FARGS[None]
     └── FBODY
         ├── VARDECL
         │   └── NAME[n]
@@ -37,4 +39,4 @@ PROG
         │       ├── FNAME[fib]
         │       └── VAR[n]
         └── RETURN
-            └── FLOAT[0.0]
+            └── INT[0]

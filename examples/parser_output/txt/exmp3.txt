@@ -33,6 +33,7 @@ PROG
 │               └── VAR[c]
 └── FDEF
     ├── FNAME[main]
+    ├── FARGS[None]
     └── FBODY
         ├── VARDECL
         │   └── NAME[a]

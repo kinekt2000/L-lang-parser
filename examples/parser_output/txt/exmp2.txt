@@ -7,16 +7,17 @@ PROG
 │       ├── IF
 │       │   ├── COND
 │       │   │   └── GRT
-│       │   │       ├── FLOAT[20.0]
-│       │   │       └── FLOAT[30.0]
+│       │   │       ├── INT[20]
+│       │   │       └── INT[30]
 │       │   ├── BRANCH[None]
 │       │   └── BRANCH
 │       │       └── WRITE
-│       │           └── FLOAT[0.0]
+│       │           └── INT[0]
 │       ├── FCALL
 │       │   └── FNAME[empty]
 │       └── RETURN
-│           └── FLOAT[0.0]
+│           └── INT[0]
 └── FDEF
     ├── FNAME[empty]
+    ├── FARGS[None]
     └── FBODY[None]
