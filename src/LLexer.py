@@ -7,7 +7,7 @@ from sly import Lexer
 class LLexer(Lexer):
     tokens = {
         IDENT, FUNC, LET,
-        INT, FLOAT,
+        INT, BININT, FLOAT,
         IF, ELSE, WHILE,
         READ, WRITE, RETURN, ASSIGN,
         POW, MUL, DIV, ADD, SUB,
@@ -59,17 +59,22 @@ class LLexer(Lexer):
     SEMICOLON = r";"
     COMMA     = r","
 
-    IDENT = r"[a-zA-Z_][a-zA-Z0-9_]*"
-
-    @_(r"([0-9]*[.])?[0-9]+")
+    @_(r"[0-9]*[.][0-9]+")
     def FLOAT(self, t):
         t.value = float(t.value)
+        return t
+
+    @_(r"0[bB][01]+")
+    def BININT(self, t):
+        t.value = int(t.value[2:], 2)
         return t
 
     @_(r"\d+")
     def INT(self, t):
         t.value = int(t.value)
         return t
+
+    IDENT = r"[a-zA-Z_][a-zA-Z0-9_]*"
 
     @_(r"\n+")
     def newline(self, t):
@@ -168,7 +173,7 @@ def make_options(opts, args):
             elif arg == "":
                 print("Output file can't be empty")
                 exit(1)
-            options['outputfile'] = f"{arg}.{options['fileformat']}"
+            options['outputfile'] = f"{arg}"
     if args:
         inputfile = args[0]
         if inputfile == "elp":
@@ -241,24 +246,27 @@ if __name__ == "__main__":
 
         if options['outputfile']:
             try:
-                output_fp = open(options['outputfile'], "x")
+                output_fp = open(f"{options['outputfile']}.{options['fileformat']}", "x")
             except FileExistsError:
-                print("File alreasy exist")
-                while(accept:=input("Rewrite file? (y/n): ") != "y"):
-                    if accept == "n":
+                print(f"'{options['outputfile']}.{options['fileformat']}' alreasy exist")
+                while((answer:=input(f"Rewrite '{options['outputfile']}.{options['fileformat']}'? (y/n): ")) != "y"):
+                    if answer == "n":
                         print("Output printed into stdout")
                         print(output_string)
+                        output_fp = None
                         break
                     else:
-                        print(f"Unknown answer {accept!r}")
+                        print(f"Unknown answer {answer!r}")
                 else:
-                    output_fp = open(options['outputfile'], "w")
+                    output_fp = open(f"{options['outputfile']}.{options['fileformat']}", "w")
             except IOError as error:
                 print(error)
                 exit(0)
-            with output_fp:
-                output_fp.write(output_string)
-                print(f"Token List printed into {os.path.abspath(output_fp.name)}")
+
+            if output_fp:
+                with output_fp:
+                    output_fp.write(output_string)
+                    print(f"Token List printed into {os.path.abspath(output_fp.name)}")
         else:
             print(output_string)
         
