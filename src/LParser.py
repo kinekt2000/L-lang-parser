@@ -196,7 +196,7 @@ class LParser(Parser):
     #===== and empty parentheses (no args)    =====#
     @_("FUNC IDENT LPAREN RPAREN")
     def f_head(self, p):
-        return Node("FNAME", p[1]),
+        return Node("FNAME", p[1]), Node("FARGS", None)
 
     #===== Arg list is list of decalrations =====#
     @_("decl")
@@ -241,7 +241,8 @@ class LParser(Parser):
     def statement(self, p):
         return Node("IF", (
             Node("COND", p.condition),
-            Node("BRANCH", p.statement)
+            Node("BRANCH", p.statement),
+            Node("BRANCH", None)
         ))
 
     #===== If else statement =====# 
@@ -412,6 +413,10 @@ class LParser(Parser):
 
     #===== Number can be integer or float =====#
     @_("INT")
+    def number(self, p):
+        return Node("INT", p[0])
+
+    @_("BININT")
     def number(self, p):
         return Node("INT", p[0])
 
@@ -595,7 +600,7 @@ if __name__ == "__main__":
                 output_fp = open(f"{options['outputfile']}.{options['fileformat']}", "x", encoding="utf-8")
             except FileExistsError:
                 print(f"'{options['outputfile']}.{options['fileformat']}' alreasy exist")
-                while((answer:=input("Rewrite file? (y/n): ")) != "y"):
+                while((answer:=input(f"Rewrite '{options['outputfile']}.{options['fileformat']}'? (y/n): ")) != "y"):
                     if answer == "n":
                         print("Output printed into stdout")
                         print(output_string)
