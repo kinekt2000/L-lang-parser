@@ -4,6 +4,8 @@ Lexer and parser for non-existent lang
 Made via `sly` python package
 
 ## Pre-requirements
+__Python 3.9__ or higher required.
+
 Package dependencies:
 * sly
 * anytree
