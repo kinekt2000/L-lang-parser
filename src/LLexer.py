@@ -1,6 +1,10 @@
 import sys, getopt, os, json
 from sly import Lexer
 
+if sys.version_info < (3, 9):
+    print("Please upgrade your Python version to 3.9 or higher")
+    exit()
+
 ##########################
 #####     LEXER      #####
 ##########################

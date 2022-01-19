@@ -4,6 +4,10 @@ from typing import Literal
 from collections.abc import Iterable
 import six
 
+if sys.version_info < (3, 9):
+    print("Please upgrade your Python version to 3.9 or higher")
+    exit()
+
 try:
     import anytree
     from anytree import Node as TreeNode, RenderTree
