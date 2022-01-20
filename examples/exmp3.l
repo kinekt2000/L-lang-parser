@@ -10,9 +10,8 @@ function bar(a, b, c){
 }
 
 function main() {
-    let a = 10.7;
-    let b = 0.92;
-    let c;
-    read(c);
+    a = 10.7;
+    b = 0.92;
+    c = read();
     write(foo(a, b, c) - bar(a, b, c));
 }

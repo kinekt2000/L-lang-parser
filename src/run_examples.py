@@ -1,6 +1,7 @@
 import os
 
 for i in range(1, 6):
+    print(f"================= RUN EXAMPLE {i} =================")
     d = os.path.sep
     parser_exe = f".{d}src{d}LParser.py"
     lexer_exe = f".{d}src{d}LLexer.py"
@@ -15,3 +16,7 @@ for i in range(1, 6):
     
     os.system(parser_cmd)
     os.system(lexer_cmd)
+
+    print("=================================================")
+    print()
+

@@ -6,8 +6,6 @@ PROG
     │   ├── FARG[arg2]
     │   └── FARG[arg3]
     └── FBODY
-        ├── VARDECL
-        │   └── NAME[v]
         ├── READ
         │   └── VAR[v]
         └── WRITE

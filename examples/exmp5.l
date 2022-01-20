@@ -5,8 +5,7 @@ function fib(n) {
 }
 
 function main(){
-    let n;
-    read(n);
+    n = read();
     print(fib(n));
     return 0;
 }

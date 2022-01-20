@@ -29,8 +29,6 @@ PROG
     ├── FNAME[main]
     ├── FARGS[None]
     └── FBODY
-        ├── VARDECL
-        │   └── NAME[n]
         ├── READ
         │   └── VAR[n]
         ├── FCALL

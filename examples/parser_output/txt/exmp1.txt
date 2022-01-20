@@ -6,18 +6,12 @@ PROG
     │   ├── FARG[arg2]
     │   └── FARG[arg3]
     └── FBODY
-        ├── VARDECL
-        │   └── NAME[a]
         ├── VARASGN
         │   ├── VAR[a]
         │   └── INT[10]
-        ├── VARDECL
-        │   └── NAME[b]
         ├── VARASGN
         │   ├── VAR[b]
         │   └── INT[30]
-        ├── VARDECL
-        │   └── NAME[c]
         ├── VARASGN
         │   ├── VAR[c]
         │   └── POW
@@ -38,8 +32,6 @@ PROG
         │           │   ├── INT[2]
         │           │   └── INT[8]
         │           └── VAR[c]
-        ├── VARDECL
-        │   └── NAME[d]
         ├── READ
         │   └── VAR[d]
         └── RETURN
