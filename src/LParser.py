@@ -266,28 +266,15 @@ class LParser(Parser):
             Node("BRANCH", p.statement)
         ))
 
-    #===== operation can be just a variable declaration =====#
-    @_("LET IDENT")
-    def operation(self, p): # declaration
-        return Node("VARDECL", Node("NAME", p[1]))
-
     #===== operation can be a variable assignment =====#
     @_("IDENT ASSIGN expression")
     def operation(self, p): # assignment
         return Node("VARASGN", (Node("VAR", p[0]), p[2]))
 
-    #===== operation can be a variable declare assignment =====#
-    @_("LET IDENT ASSIGN expression")
-    def operation(self, p): # assignment
-        return (
-            Node("VARDECL", Node("NAME", p[1])),
-            Node("VARASGN", (Node("VAR", p[1]), p[3]))
-        )
-
     #===== Operation can be read statement =====#
-    @_("READ LPAREN IDENT RPAREN")
+    @_("IDENT ASSIGN READ LPAREN RPAREN")
     def operation(self, p):
-        return Node("READ", Node("VAR", p[2]))
+        return Node("READ", Node("VAR", p[0]))
 
     @_("WRITE LPAREN expression RPAREN",
        "WRITE LPAREN condition  RPAREN")
@@ -592,6 +579,8 @@ if __name__ == "__main__":
             exit(0)
 
         if anytree is not None:
+            if options['outputimagefile']:
+                os.makedirs(os.path.dirname(f"{options['outputimagefile']}"), exist_ok=True)
             output_string = dump_ast(ast, format=options['fileformat'], dump_image=options['outputimagefile'])
         else:
             print("'anytree' not found. Try 'pip install anytree'.")
@@ -600,6 +589,7 @@ if __name__ == "__main__":
             output_string = str(ast)
 
         if options['outputfile']:
+            os.makedirs(os.path.dirname(f"{options['outputfile']}.{options['fileformat']}"), exist_ok=True)
             try:
                 output_fp = open(f"{options['outputfile']}.{options['fileformat']}", "x", encoding="utf-8")
             except FileExistsError:

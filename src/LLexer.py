@@ -10,7 +10,7 @@ if sys.version_info < (3, 9):
 ##########################
 class LLexer(Lexer):
     tokens = {
-        IDENT, FUNC, LET,
+        IDENT, FUNC,
         INT, BININT, FLOAT,
         IF, ELSE, WHILE,
         READ, WRITE, RETURN, ASSIGN,
@@ -28,7 +28,6 @@ class LLexer(Lexer):
 
     # assign tokens
     FUNC   = r"function"
-    LET    = r"let"
     IF     = r"if"
     ELSE   = r"else"
     WHILE  = r"while"
@@ -249,6 +248,7 @@ if __name__ == "__main__":
         output_string = dump_tokens(tokens, options['fileformat'])
 
         if options['outputfile']:
+            os.makedirs(os.path.dirname(f"{options['outputfile']}.{options['fileformat']}"), exist_ok=True)
             try:
                 output_fp = open(f"{options['outputfile']}.{options['fileformat']}", "x")
             except FileExistsError:

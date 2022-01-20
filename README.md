@@ -67,14 +67,14 @@ function main(a, b, c) write(a + b + c);
 
 // list of statements
 function main(a, b, c) {
-    let d = a + b + c;
+    d = a + b + c;
     write(d);
 }
 ```
 Simple conditional statements are available. They can also accept either a single statement or a statement list enclosed in curly braces.
 ```js
 function main() {
-    let a = 0
+    a = 0;
 
     // if statement ("else" statement can be ommited)
     if (a < 5) a = a + 1;
@@ -87,19 +87,18 @@ function main() {
     }
 }
 ```
-The variable declaration operator already shown earlier. A variable can be simply declared, or it can also be assigned. Integer and floating point variables available. Integers can be written in binary with prefix "_0b_" or "_0B_".
+Variable assignment operator already shown earlier. Integer and floating point variables are available. Integers can be written in binary with prefix "_0b_" or "_0B_".
 ```js
 function main() {
-    let a;
     a = 0b1010;
-    let b = 10.5 - 6 / 0B10;
+    b = 10.5 - 6 / 0B10;
 }
 ```
 Functions and variable assignments take an expression
 ```js
 function foo(a, b) return a / b;
 function main() {
-    let a = foo(12 / 8, 3.2 ^ 0.9) - 15.9 * (2 + 6.4);
+    a = foo(12 / 8, 3.2 ^ 0.9) - 15.9 * (2 + 6.4);
 }
 ```
 Condition used for conditional statements. && (AND), || (OR), ! (NOT) operators are avalable for conditions. To get a condition, you need to compare two expressions with any of next operators "==", "!=", "<=", "<", ">=", ">".
@@ -109,11 +108,10 @@ function main() {
     return 1;
 }
 ```
-To manipulate the I/O stream, operators `read` and `write` can be used. `read` takes a variable, `write` takes an expression or condition.
+To manipulate the I/O stream, built-in operators `read` and `write` can be used. `read` uses a variable, `write` takes an expression or condition. They look similiar to functions, but displayed differently in AST.
 ```js
 function main() {
-    let a;
-    read(a);
+    a = read();
     write(a * 2);
 }
 ```
