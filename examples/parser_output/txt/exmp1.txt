@@ -1,14 +1,12 @@
 PROG
 └── FDEF
     ├── FNAME[main]
-    ├── FARGS
-    │   ├── FARG[arg1]
-    │   ├── FARG[arg2]
-    │   └── FARG[arg3]
+    ├── FARGS[None]
     └── FBODY
         ├── VARASGN
         │   ├── VAR[a]
-        │   └── INT[10]
+        │   └── NEG
+        │       └── INT[10]
         ├── VARASGN
         │   ├── VAR[b]
         │   └── INT[30]
