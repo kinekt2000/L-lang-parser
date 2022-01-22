@@ -34,14 +34,14 @@ To get more info about parser usage, run
 ~$ python LParser -h
 ```
 
-### Compiler
-Run compiler with specified input to get compiled python code
+### Translator
+Run translator with specified input to get translated into python code
 ```console
-~$ python LCompiler <input_file> 
+~$ python LTranslator <input_file> 
 ```
 To get more info about parser usage, run 
 ```console
-~$ python LCompiler -h
+~$ python LTranslator -h
 ```
 
 ## Example
@@ -86,7 +86,7 @@ Simple conditional statements are available. They can also accept either a singl
 function main() {
     a = 0;
 
-    // if statement ("else" statement can be ommited)
+    // if statement ("else" statement can be omitted)
     if (a < 5) a = a + 1;
     else a = a - 1;
 
@@ -165,12 +165,12 @@ DESCRIPTION:
 ```
 
 
-### Compiler
+### Translator
 ```
 NAME:
-        LCompiler - compiler into python for non-exsitend L lang
+        LTranslator - translator into python for non-exsitend L lang
 SYNOPSIS:
-        LCompiler [options]... input_file
+        LTranslator [options]... input_file
 DESCRIPTION:
         Write arguments to the standard output.
 
@@ -178,5 +178,5 @@ DESCRIPTION:
           -h,    --help                 Display info about program.
           -o[=], --output[=]            Output file. If not specified, printed into stdout.
         Arguments:
-          input_file                    Required. File with L lang source to be compiled.
+          input_file                    Required. File with L lang source to be translated.
 ```

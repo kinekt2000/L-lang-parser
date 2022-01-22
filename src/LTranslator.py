@@ -14,12 +14,12 @@ def named(obj_, name_):
 
 
 ##########################
-#####    COMPILER    #####
+#####   TRANSLATOR   #####
 ##########################
 def ast_node(func):
     def wrapper(self, node, level=0):
         if node.name != func.__name__:
-            raise LCompilerError(f"Node[{node.name!r}] passed into {func.__name__}")
+            raise LTranslatorError(f"Node[{node.name!r}] passed into {func.__name__}")
         code = func(self, node, level or 0)
         if isinstance(code, str) and level is not None:
             return [code]
@@ -27,18 +27,18 @@ def ast_node(func):
     return wrapper
 
 
-class LCompilerError(Exception):
+class LTranslatorError(Exception):
     def __init__(self, *args: object):
         super().__init__(*args)
 
-class LCompiler:
+class LTranslator:
     indent = " "*4
 
     def __init__(self) -> None:
         self.lines = []
         self.args = 0
 
-    def compile(self, ast: Node):
+    def translate(self, ast: Node):
         self.lines = self.PROG(ast)
         return self.lines
 
@@ -285,17 +285,17 @@ def make_options(opts, args):
             exit(1)
         options['inputfile'] = inputfile
     else:
-        print("Input file not specified. Use 'LCompiler.py -h' for help")
+        print("Input file not specified. Use 'LTranslator.py -h' for help")
         exit(1)
 
     return options
 
 def print_help():
     print("NAME:")
-    print("\tLCompiler - compiler into python for non-exsitend L lang")
+    print("\tLTranslator - translator into python for non-exsitend L lang")
     
     print("SYNOPSIS:")
-    print("\tLCompiler [options]... input_file")
+    print("\tLTranslator [options]... input_file")
     
     print("DESCRIPTION:")
     print("\tWrite arguments to the standard output.\n")
@@ -304,7 +304,7 @@ def print_help():
     print("\t  -o[=], --output[=]\t\tOutput file. If not specified, printed into stdout.")
 
     print("\tArguments:")
-    print("\t  input_file\t\t\tRequired. File with L lang source to be compiled.\n")
+    print("\t  input_file\t\t\tRequired. File with L lang source to be translated.\n")
 
 
 if __name__ == "__main__":
@@ -327,7 +327,7 @@ if __name__ == "__main__":
         text = "".join(input_fp.readlines())
         lexer = LLexer()
         parser = LParser(text)
-        compiler = LCompiler()
+        translator = LTranslator()
 
         try:
             ast = parser.parse(lexer.tokenize(text))
@@ -335,7 +335,7 @@ if __name__ == "__main__":
             print(error)
             exit(0)
 
-        lines = compiler.compile(ast)
+        lines = translator.translate(ast)
 
         if options['outputfile']:
             os.makedirs(os.path.dirname(f"{options['outputfile']}"), exist_ok=True)
@@ -361,7 +361,7 @@ if __name__ == "__main__":
                 with output_fp:
                     for line in lines:
                         output_fp.write(line + "\n")
-                    print(f"Code compiled into {os.path.abspath(output_fp.name)}")
+                    print(f"Code translated into {os.path.abspath(output_fp.name)}")
         else:
             print(os.linesep.join(lines))
 
