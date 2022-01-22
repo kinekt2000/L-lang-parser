@@ -34,6 +34,16 @@ To get more info about parser usage, run
 ~$ python LParser -h
 ```
 
+### Compiler
+Run compiler with specified input to get compiled python code
+```console
+~$ python LCompiler <input_file> 
+```
+To get more info about parser usage, run 
+```console
+~$ python LCompiler -h
+```
+
 ## Example
 Only a sequence of functions can be defined in program global scope
 ```js
@@ -123,7 +133,7 @@ NAME:
         LLexer - lexer for non-exsitend L lang
 SYNOPSIS:
         LLexer [options]... input_file
-DESCRIPTION
+DESCRIPTION:
         Write arguments to the standard output.
 
         Options:
@@ -141,7 +151,7 @@ NAME:
         LParser - parser for non-exsitend L lang
 SYNOPSIS:
         LParser [options]... input_file
-DESCRIPTION
+DESCRIPTION:
         Write arguments to the standard output.
 
         Options:
@@ -152,4 +162,21 @@ DESCRIPTION
 
         Arguments:
           input_file                    Required. File with L lang source to be parsed.
+```
+
+
+### Compiler
+```
+NAME:
+        LCompiler - compiler into python for non-exsitend L lang
+SYNOPSIS:
+        LCompiler [options]... input_file
+DESCRIPTION:
+        Write arguments to the standard output.
+
+        Options:
+          -h,    --help                 Display info about program.
+          -o[=], --output[=]            Output file. If not specified, printed into stdout.
+        Arguments:
+          input_file                    Required. File with L lang source to be compiled.
 ```

@@ -161,8 +161,8 @@ def make_options(opts, args):
             pass
         elif opt in ["-o", "--output"]:
             if options['outputfile']:
-                print(f"Format already set as {options['outputfile']!r} before.")
-                print(f"Remove redundant '-f' or '--format' flags")
+                print(f"Output file already set as {options['outputfile']!r} before.")
+                print(f"Remove redundant '-o' or '--output' flags")
                 exit(1)
             if opt == "-o" and arg == "utput":
                 print(f"Output file is 'utput.{options['fileformat']}'. You probably meant to use the '--output' (doubledashed)")
@@ -205,7 +205,7 @@ def print_help():
     print("SYNOPSIS:")
     print("\tLLexer [options]... input_file")
     
-    print("DESCRIPTION")
+    print("DESCRIPTION:")
     print("\tWrite arguments to the standard output.\n")
     print("\tOptions:")
     print("\t  -h,    --help\t\t\tDisplay info about program.")
