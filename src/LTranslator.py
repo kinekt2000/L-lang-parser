@@ -1,9 +1,9 @@
 import sys, getopt, os
 
-from sly.yacc import YaccError
 
-from LLexer import LLexer
-from LParser import LParser, Node
+if __name__ == "__main__":
+    from LLexer import LLexer
+    from LParser import LParser, YaccError, Node
 
 
 ##########################

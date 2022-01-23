@@ -7,7 +7,7 @@ def_list : definition def_list
 
 definition : fdef
 
-dfef : f_head statement
+fdef : f_head statement
 
 f_head : "function" IDENT "(" arg_list ")"
        | "function" IDENT "(" ")"
@@ -32,10 +32,8 @@ stm_list : statement stm_list
          | /* empty */
          ;
 
-operation : "let" IDENT
-          | IDENT "=" expression
-          | "let" IDENT "=" expression
-          | "read" "(" IDENT ")"
+operation : IDENT "=" expression
+          | IDENT "=" "read" "(" ")"
           | "write" "(" expressions ")"
           | "write" "(" condition ")"
           | "return" expression
