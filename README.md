@@ -1,5 +1,5 @@
 # L-lang-parser
-Lexer and parser for non-existent lang
+Lexer, parser and translator for non-existent lang
 
 Made via `sly` python package
 
